@@ -16,6 +16,7 @@ ffibuilder.cdef("""
 
 typedef struct {
     volatile float bpm;
+    volatile float vol;
     ...;
 } Context;
 
@@ -36,12 +37,13 @@ r"""
 #include <thread>
 #include <atomic>
 #include <cstdint>
+#include <math.h>
 #include "OnsetDetectionFunction.h"
 #include "BTrack.h"
 
 #define SAMPLE_RATE (44100)
 #define HOP_SIZE (512)
-#define FRAME_SIZE (2048)
+#define FRAME_SIZE (1024)
 
 
 thread_local const char *btrack_err = NULL;
@@ -59,6 +61,7 @@ int pa_check_error(PaError err) {
 
 typedef struct {
     volatile float bpm;
+    volatile float vol;
     std::atomic_int has_beats;
     PaStream *stream;
 } Context;
@@ -89,7 +92,12 @@ class PaData {
         for (; i < FRAME_SIZE; i++) {
             frame[i] = (double) inputBuffer[i - (FRAME_SIZE - HOP_SIZE)];
         }
-        //printf("%f %f %f\n", frame[0], frame[1], frame[FRAME_SIZE - 1]);
+
+        float acc = 0.0f;
+        for (i = 0; i < FRAME_SIZE; i++) {
+            acc += frame[i] * frame[i];
+        }
+        ctx->vol = sqrt(acc / FRAME_SIZE);
 
         btrack.processAudioFrame(frame);
         if (btrack.beatDueInCurrentFrame())

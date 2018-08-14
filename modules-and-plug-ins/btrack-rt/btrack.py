@@ -7,6 +7,7 @@ def _check_error():
     msg = ffi.string(lib.get_last_error())
     raise Exception(msg)
 
+
 class Tracker:
     slots = ('__ctx',)
     def __init__(self, ctx):
@@ -18,6 +19,10 @@ class Tracker:
     @property
     def bpm(self):
         return self.__ctx.bpm
+
+    @property
+    def vol(self):
+        return self.__ctx.vol
 
 
 @contextmanager
