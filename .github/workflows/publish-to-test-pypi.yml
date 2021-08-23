@@ -22,6 +22,7 @@ jobs:
         pip install
         build
         cffi
+        wheel
         --user
     - name: Build a source tarball
       run: >-
