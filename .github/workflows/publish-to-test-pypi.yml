@@ -9,8 +9,8 @@ defaults:
 jobs:
   build-n-publish:
     name: Build and publish Python 🐍 distributions 📦 to PyPI and TestPyPI
-    runs:
-      using: 'docker'
-      image: 'Dockerfile'
-      args:
-        - '3.*'
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: build and upload manylinux wheels
+        uses: ./.github/actions/action
