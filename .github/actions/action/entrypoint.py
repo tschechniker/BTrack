@@ -19,6 +19,8 @@ if __name__ == "__main__":
         for version in passed_versions_str.split(","):
             versions.append(version.strip())
 
+    os.chdir('modules-and-plug-ins/btrack-rt')
+
     for version in versions:
         logging.info(f"Building wheel for Python {version}")
         subprocess.call([f"/opt/python/{VERSIONS[version]}/bin/python", "setup.py", "bdist_wheel"])
