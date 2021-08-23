@@ -18,8 +18,9 @@ jobs:
         python-version: 3.7
     - name: install system deps
       run: >-
+        sudo
         apt-get 
-        install 
+        install -Y
         portaudio19-dev 
     - name: Install pypa/build
       run: >-
