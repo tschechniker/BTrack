@@ -23,6 +23,7 @@ jobs:
         install -y
         portaudio19-dev 
         libfftw3-dev
+        libsamplerate0-dev
     - name: Install pypa/build
       run: >-
         python -m
