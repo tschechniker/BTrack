@@ -11,7 +11,7 @@ jobs:
     name: Build and publish Python 🐍 distributions 📦 to PyPI and TestPyPI
     runs-on: ubuntu-latest
     env:
-      TWINE_USERNAME: '_token_'
+      TWINE_USERNAME: '__token__'
       TWINE_PASSWORD: ${{ secrets.PYPI_API_TOKEN }}
     steps:
     - uses: actions/checkout@v2
