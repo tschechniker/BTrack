@@ -43,6 +43,7 @@ jobs:
         python
         setup.py
         bdist_wheel
+        --universal
 
     - name: Publish distribution 📦 to Test PyPI
       uses: pypa/gh-action-pypi-publish@master
