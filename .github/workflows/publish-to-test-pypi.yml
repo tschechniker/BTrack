@@ -13,4 +13,4 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: build and upload manylinux wheels
-        uses: ./.github/actions/action
+      uses: ./.github/actions/action
